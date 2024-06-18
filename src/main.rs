@@ -10,10 +10,15 @@ use rust_os::println;
 #[no_mangle]
 pub extern "C" fn _start() -> ! {
     println!("Hello World!");
-    println!("Let's do some math! 1/3 is equal to {}", 1/3);
+
+    rust_os::init();
+
+    x86_64::instructions::interrupts::int3();
     
     #[cfg(test)]
     test_main();
+
+    println!("no crashing!\n");
 
     loop{}
 }
